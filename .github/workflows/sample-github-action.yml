@@ -1,0 +1,77 @@
+# Optional: Can be any name will be displayed on the actions tab
+name: Sample-github-action
+
+
+# Optional: The name for workflow runs generated from the workflow,
+# In this case it takes the github context to print person that triggered it
+run-name: ${{ github.actor }} is learning Github actions
+
+
+# ==============================================================================
+# TRIGGERS
+# ==============================================================================
+
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches: [main, feat*]
+#     type: [closed, open  ]
+#   # Allows you to run the workflow manually from the action's tab
+#   workflow_dispach: 
+
+# Alternatively
+# 
+on: [push, pull_request]
+
+
+
+# ==============================================================================
+# ENVIRONMENT VARIABLES
+#==============================================================================
+#
+# After declaration, they can be used as follows.
+# They can also be declared inside a step
+# 
+# ${{ env.<environment_name> }}
+# ==============================================================================
+env:
+  USE_SQLITE: True
+  SECRET_KEY: testsecretkey
+  ALLOWED_HOSTS: 127.0.0.1,localhost,example.com
+  DJANGO_SETTINGS_MODULE: config.settings.local
+
+
+# ==============================================================================
+# JOBS
+# ==============================================================================  
+# 
+# Includes 3 main parts
+#   1. Name of the job
+#   2. Machine it runs on
+#   3. Steps to take
+
+# Steps include
+#   1. name : Optional
+#   2. uses : Optional
+#   3. run : Optional
+# ==============================================================================
+
+jobs: 
+  simple-run-server: # Name of the 1st job.
+    runs-on: ubuntu-latest # The environment to use
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.x
+      
+      - name: Install dependancies
+        run: pip install -r ./requirements/local.txt
+
+      - name: Start test
+        run: python manage.py test apps/

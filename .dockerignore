@@ -1,0 +1,17 @@
+.vscode/
+venv/
+env/
+VENV/
+ENV/
+logs/
+**/__pycache__
+
+.env.example
+
+.git
+.gitignore
+.dockerignore
+
+*sqlite3
+deployment.txt
+**/*.md
