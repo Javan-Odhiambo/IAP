@@ -64,3 +64,4 @@ function updateQuantityAndSubtotal(event) {
 function calculateSubtotal(quantity, price) {
   return quantity * price;
 }
+
