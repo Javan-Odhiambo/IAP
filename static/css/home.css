@@ -1,3 +1,64 @@
+:root{
+    --primary-color: #FFFFFF;
+    --accent-color: #4A2DFC;
+    --secondary-color: #0C0101;
+    --light-grey: #D9D9D9;
+    --mid-grey: #7A7A7A;
+    --dark-grey:  #353535;
+    
+    --btn-primary-color: var(--accent-color);
+    --btn-secondary-color: #6c757d;
+    --btn-primary-text-color: #fff;
+    --btn-secondary-text-color: #fff;
+    
+    --text-primary-color: #212529;
+    --text-secondary-color: #6c757d;
+    --text-accent-color: #4A2DFC;
+    --text-light-color: #fff;
+}
 main{
-    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color);
+}
+.search-bar{
+    display: flex;
+    justify-content: center;
+}
+.landing{
+    display: flex;
+    justify-content: center;
+}
+.landing div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+.primary-display{
+    display: flex;
+    flex-direction: column;
+}
+.primary-display h3{
+    align-self: center;
+}
+
+.landing-accent{
+    color: var(--text-accent-color);
+}
+.product-container{
+    display: flex;
+    flex-direction: column;
+}
+.product-section{
+    display: flex;
+    justify-content: space-evenly;
+}
+.product-card{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 500px;
+}
+.product-card div{
+    justify-content: center;
 }
