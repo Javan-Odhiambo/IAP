@@ -47,6 +47,4 @@ main{
 .btn-secondary{
     background-color: var(--btn-secondary-color);
     color: var(--btn-secondary-text-color);
-    width: 220px;
-    height: 40px;
 }
