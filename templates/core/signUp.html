@@ -1,0 +1,45 @@
+{% extends './../base.html' %}
+{% load static %}
+
+
+{% block title %}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="../static/css/signUP.css">
+{% endblock %}
+
+{% block main %}
+    <body>
+        <div class="sign-up">
+            <h3>SIGN UP</h3>
+            <section class="input-fields">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstname">
+            </section>
+            <section class="input-fields">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName">
+            </section>
+            <section class="input-fields">   
+               <label for="emailAddress">Email address</label>
+                <input type="text" name="emailAddress">
+            </section>
+            <section class="input-fields">
+                <label for="password">password</label>
+                <input type="password" name="password">
+            </section>
+            <section class="input-fields">
+                <label for="confirmPassword">confirm password</label>
+                <input type="password" name="confirmPassword">
+            </section>
+            <hr>
+            <button class=".btn .btn-primary">CREATE ACCOUNT</button>
+            <P>Already have an account <a href="">log in</a> ?</P>
+        </div>
+    </body>
+{% endblock %}
+
+{% block javascript %}
+<script src=""></script>
+{% endblock %}
+

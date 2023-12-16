@@ -1,11 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Product Detail</h1>
-</body>
-</html>
+{% extends './../base.html' %} {% load static %} {% block title %}{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/product-detail.css' %}" />
+{% endblock %} {% block main %}
+<main class="container">
+  <div class="main-container">
+    <div class="image-div">
+      <img src="" alt="" />
+    </div>
+    <div class="left-side">
+      <p class="name">Black Sweatshirt</p>
+      <p class="price">
+        Ksh
+        <span class="price-value">2000</span>
+      </p>
+      <p class="sub-title">
+        Availability:
+        <span class="avail-value">In stock</span>
+      </p>
+      <div class="size">
+        <p class="sub-title">
+          Size :
+          <span class="size-value">S</span>
+        </p>
+        <div>
+          <button class="size-btns">XS</button>
+          <button class="size-btns">S</button>
+          <button class="size-btns">M</button>
+          <button class="size-btns">L</button>
+          <button class="size-btns">XL</button>
+        </div>
+      </div>
+
+      <div class="color">
+        <p class="sub-title">
+          Color :
+          <span class="color-value"> White </span>
+        </p>
+        <div>
+          <button class="color-btns">White</button>
+          <button class="color-btns">Blue</button>
+          <button class="color-btns">Black</button>
+        </div>
+      </div>
+      <div>
+        <p class="sub-title">Quantity</p>
+        <div class="quantity">
+          <button class="quantity-btns">-</button>
+          <p class="quantity-value">1</p>
+          <button class="quantity-btns">+</button>
+        </div>
+      </div>
+      <p class="subtotal">
+        Subtotal:
+        <span class="sub-value">0</span>
+      </p>
+      <p class="description">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam illum et
+        molestiae vel velit id?
+      </p>
+      <button class="btn-secondary">ADD TO CART</button>
+      <div class="terms">
+        <input type="checkbox" />
+        <p>
+          I agree with
+          <a href="#">Terms and conditions</a>
+        </p>
+      </div>
+      <button class="btn-primary">BUY NOW</button>
+    </div>
+  </div>
+</main>
+
+{% endblock %} {% block javascript %}
+<script src="{% static 'js/product-detail.js' %}"></script>
+{% endblock %}

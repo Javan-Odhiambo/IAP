@@ -14,7 +14,8 @@ def login_user(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect(request.GET.get("next", "home"))
+            next_url = request.GET.get("next", "/")
+            return redirect(next_url)
         else:
             messages.error(request, "Invalid login credentials")
     return render(request, "accounts/login.html")
@@ -23,11 +24,21 @@ def login_user(request):
 def signup_user(request):
     """Signs up a user"""
     if request.method == "POST":
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        email = request.POST.get("email")
-        password1 = request.POST.get("password1")
-        password2 = request.POST.get("password2")
+        first_name = request.POST.get(
+            "first_name"
+        )  # change depending on the name attribute of the input field
+        last_name = request.POST.get(
+            "last_name"
+        )  # change depending on the name attribute of the input field
+        email = request.POST.get(
+            "email"
+        )  # change depending on the name attribute of the input field
+        password1 = request.POST.get(
+            "password1"
+        )  # change depending on the name attribute of the input field
+        password2 = request.POST.get(
+            "password2"
+        )  # change depending on the name attribute of the input field
         if password1 != password2:
             messages.error(request, "Passwords do not match")
         else:
@@ -55,8 +66,12 @@ def logout_user(request):
 def profile(request):
     """Displays and edit the user profile"""
     if request.method == "POST":
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
+        first_name = request.POST.get(
+            "first_name", request.user.first_name
+        )  # change depending on the name attribute of the input field
+        last_name = request.POST.get(
+            "last_name", request.user.last_name
+        )  # change depending on the name attribute of the input field
         user = request.user
         user.first_name = first_name
         user.last_name = last_name
