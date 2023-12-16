@@ -1,12 +1,9 @@
 from django.urls import path
 
-from .views import (
-    categoryPage,
-    checkoutPage,
-    homePage,
-    productDetailPage,
-    searchResultsPage,
-)
+from .views import (categoryPage, checkoutPage, homePage, productDetailPage,
+                    searchResultsPage)
+
+app_name = "core"
 
 urlpatterns = [
     path("product/<slug:slug>/", productDetailPage, name="product-detail"),

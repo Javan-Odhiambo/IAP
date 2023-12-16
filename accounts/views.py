@@ -51,7 +51,7 @@ def signup_user(request):
             user = authenticate(request, email=email, password=password1)
             if user is not None:
                 login(request, user)
-                return redirect(request.GET.get("next", "home"))
+                return redirect("accounts:login")
     return render(request, "accounts/signup.html")
 
 
@@ -59,7 +59,7 @@ def signup_user(request):
 def logout_user(request):
     """Logs out a user"""
     logout(request)
-    return redirect("login")
+    return redirect("accounts:login")
 
 
 @login_required
@@ -77,5 +77,5 @@ def profile(request):
         user.last_name = last_name
         user.save()
         messages.success(request, "Profile updated successfully")
-        return redirect("profile")
+        return redirect("accounts:profile")
     return render(request, "accounts/edit-profile.html")
