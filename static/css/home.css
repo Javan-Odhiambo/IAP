@@ -28,11 +28,17 @@ main{
 .landing{
     display: flex;
     justify-content: center;
+    padding-top: 20px;
 }
 .landing div {
     display: flex;
     flex-direction: column;
     align-items: center;  
+    justify-content: center;
+    padding-right: 100px;
+}
+.landing div h2 {
+    padding-bottom: 30px;
 }
 .primary-display{
     display: flex;
@@ -40,6 +46,7 @@ main{
 }
 .primary-display h3{
     align-self: center;
+    padding-top: 50px;
 }
 
 .landing-accent{
@@ -48,17 +55,38 @@ main{
 .product-container{
     display: flex;
     flex-direction: column;
+    padding: 70px;
 }
 .product-section{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding-top: 50px;
+    gap: 70px;
 }
 .product-card{
     display: flex;
     flex-direction: column;
-    width: 250px;
-    height: 500px;
+    width: calc(25% - 50px); 
 }
 .product-card div{
     justify-content: center;
+}
+.product {
+    padding: 10px;
+}
+
+.product span {
+    display: block;
+}
+
+.product div {
+    margin-top: 10px;
+}
+
+.product h4,
+.product p {
+    margin: 10px 0;
+}
+.product button {
+    margin-top: 10px;
 }
