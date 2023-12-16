@@ -1,11 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Checkout</h1>
-</body>
-</html>
+{% extends './../base.html' %} {% load static %} {% block title %}{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
+{% endblock %} {% block main %}
+<main class="container">
+  <div class="checkout">
+    <div class="summary-container">
+      <div class="order">
+        <div class="img-cont">
+          <img src="" alt="" />
+        </div>
+        <div class="summary-description">
+          <p class="product-name">Black Sweatshirt</p>
+          <p class="product-specifications">s/black/2 &commat; 2000</p>
+          <p class="total">Total : 4000</p>
+        </div>
+      </div>
+      <div class="order">
+        <div class="img-cont">
+          <img src="" alt="" />
+        </div>
+        <div class="summary-description">
+          <p class="product-name">Black Sweatshirt</p>
+          <p class="product-specifications">s/black/2 &commat; 2000</p>
+          <p class="total">Total : 4000</p>
+        </div>
+      </div>
+      <div class="order">
+        <div class="img-cont">
+          <img src="" alt="" />
+        </div>
+        <div class="summary-description">
+          <p class="product-name">Black Sweatshirt</p>
+          <p class="product-specifications">s/black/2 &commat; 2000</p>
+          <p class="total">Total : 4000</p>
+        </div>
+      </div>
+      <div class="order">
+        <div class="img-cont">
+          <img src="" alt="" />
+        </div>
+        <div class="summary-description">
+          <p class="product-name">Black Sweatshirt</p>
+          <p class="product-specifications">s/black/2 &commat; 2000</p>
+          <p class="total">Total : 4000</p>
+        </div>
+      </div>
+      <div class="order">
+        <div class="img-cont">
+          <img src="" alt="" />
+        </div>
+        <div class="summary-description">
+          <p class="product-name">Black Sweatshirt</p>
+          <p class="product-specifications">s/black/2 &commat; 2000</p>
+          <p class="total">Total : 4000</p>
+        </div>
+      </div>
+    </div>
+    <div class="input-container">
+      <form>
+        <p class="delivery-text">DELIVERY</p>
+        <div class="location-cont">
+          <label for="location">Enter your location </label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            required
+            class="input"
+          />
+        </div>
+        <div class="number-cont">
+          <label for="">Enter phone number</label>
+          <input type="text" id="phone-number" name="phone-number" required />
+        </div>
+        <p class="subtotal">Subtotal : Ksh 16000</p>
+        <div class="submit">
+          <input type="submit" value="ORDER" class="btn-primary" />
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %} {% block javascript %}
+<script src=""></script>
+{% endblock %}
