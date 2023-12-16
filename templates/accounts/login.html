@@ -11,7 +11,8 @@
 <main class="container">
   <div class="main">
     <div class="login-form-container">
-      <form>
+      <form method="post" action="{% url "accounts:login" %}?next={{ request.GET.next | default:"/" }}">
+        {% csrf_token %}
         <div class="login-text">LOG IN</div>
         <div class="email-cont">
           <label for="username">Email Adress:</label>

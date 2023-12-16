@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 Django settings for config project.
 
@@ -37,9 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    "django_browser_reload",
     "core",
-    "accounts"
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -101,6 +103,13 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+# Custom user model
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+# Login settings
+LOGIN_URL = "accounts:login"
+LOGIN_REDIRECT_URL = "/"
 
 
 # Internationalization
