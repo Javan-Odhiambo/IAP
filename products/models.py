@@ -5,8 +5,9 @@ from django.utils.text import slugify
 User = get_user_model()
 
 
-# Create your models here.
 class Product(models.Model):
+    """Model definition for Product."""
+
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
     description = models.TextField()
@@ -18,7 +19,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ["-updated_at"]
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
@@ -32,10 +33,13 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
+    """Model definition for ProductImage."""
+
     image = models.ImageField(upload_to="products")
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
 
     class Meta:
+        ordering = ["-id"]
         verbose_name = "Product Image"
         verbose_name_plural = "Product Images"
 
@@ -44,40 +48,33 @@ class ProductImage(models.Model):
 
 
 class Variant(models.Model):
+    """Model definition for Variant."""
+
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
-    variant_unit = models.ForeignKey("products.VariantUnit", on_delete=models.CASCADE)
+    size = models.ForeignKey("products.ProductSize", on_delete=models.CASCADE)
+    color = models.ForeignKey("products.ProductColor", on_delete=models.CASCADE)
     stock_quantity = models.IntegerField()
     is_available = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        ordering = ["-updated_at"]
         verbose_name = "Variant"
         verbose_name_plural = "Variants"
-        unique_together = ["product", "variant_unit"]
+        unique_together = ["product", "size", "color"]
 
     def save(self, *args, **kwargs):
         self.is_available = self.stock_quantity > 0
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.product.name}-{self.variant_unit.size}-{self.variant_unit.color}"
-
-
-class VariantUnit(models.Model):
-    size = models.ForeignKey("products.ProductSize", on_delete=models.CASCADE)
-    color = models.ForeignKey("products.ProductColor", on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = "Variant Unit"
-        verbose_name_plural = "Variant Units"
-        unique_together = ["size", "color"]
-
-    def __str__(self):
-        return f"size: {self.size} color: {self.color}"
+        return f"{self.product.name}-{self.size}-{self.color}"
 
 
 class ProductSize(models.Model):
+    """Model definition for ProductSize."""
+
     value = models.CharField(max_length=255, unique=True)
 
     class Meta:
@@ -93,6 +90,8 @@ class ProductSize(models.Model):
 
 
 class ProductColor(models.Model):
+    """Model definition for ProductColor."""
+
     value = models.CharField(max_length=255, unique=True)
 
     class Meta:
@@ -108,13 +107,15 @@ class ProductColor(models.Model):
 
 
 class Category(models.Model):
+    """Model definition for Category."""
+
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-created_at"]
+        ordering = ["-updated_at"]
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
@@ -129,6 +130,8 @@ class Category(models.Model):
 
 
 class Review(models.Model):
+    """Model definition for Review."""
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
     rating = models.IntegerField()
@@ -136,6 +139,7 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        ordering = ["-updated_at"]
         verbose_name = "Review"
         verbose_name_plural = "Reviews"
         unique_together = ["user", "product"]
