@@ -6,6 +6,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Category</h1>
+    <h1>Category</h1> 
+    {% for category in categories  %}
+        <p>{{ category.name }}</p>
+        {% for product in category.products.all %}
+            <p>{{ product.name }}</p>
+        {% empty %}
+            <p>No product</p>
+        {% endfor %}
+    {% empty %}
+        <p>No categories</p>
+    {% endfor %}
 </body>
 </html>
