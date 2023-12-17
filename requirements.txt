@@ -6,6 +6,7 @@ black==23.12.0
 click==8.1.7
 Django==4.2.8
 django-browser-reload==1.12.1
+django-phonenumber-field==7.2.0
 frozenlist==1.4.1
 idna==3.6
 isort==5.13.2
@@ -13,6 +14,7 @@ multidict==6.0.4
 mypy-extensions==1.0.0
 packaging==23.2
 pathspec==0.12.1
+phonenumbers==8.13.26
 Pillow==10.1.0
 platformdirs==4.1.0
 sqlparse==0.4.4
