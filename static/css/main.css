@@ -8,18 +8,17 @@
 }
 
 :root {
-  --accent-color: #4a2dfc;
   --primary-color: #ffffff;
+  --accent-color: #4a2dfc;
   --secondary-color: #0c0101;
   --light-grey: #d9d9d9;
-  --dark-grey: #353535;
-  --lightgrey: #f0f0f0;
   --mid-grey: #7a7a7a;
+  --dark-grey: #353535;
 
   --btn-primary-color: var(--accent-color);
   --btn-secondary-color: var(--dark-grey);
   --btn-small-color: var(--primary-color);
-  --btn-primary-text-color: var(--lightgrey);
+  --btn-primary-text-color: var(--primary-color);
   --btn-secondary-text-color: var(--primary-color);
 
   --text-primary-color: var(--secondary-color);
@@ -106,6 +105,17 @@ footer a {
   flex-direction: row;
   width: 100%;
 }
-.footer-container div {
+
+.icons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.legal-policy,
+.Categories,
+.social-platforms {
   margin: 1.5rem 9rem 0 7rem;
 }
