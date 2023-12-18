@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
 
@@ -53,7 +54,7 @@ class Variant(models.Model):
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
     size = models.ForeignKey("products.ProductSize", on_delete=models.CASCADE)
     color = models.ForeignKey("products.ProductColor", on_delete=models.CASCADE)
-    stock_quantity = models.IntegerField()
+    stock_quantity = models.PositiveBigIntegerField()
     is_available = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -134,7 +135,7 @@ class Review(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
-    rating = models.IntegerField()
+    rating = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -143,3 +144,15 @@ class Review(models.Model):
         verbose_name = "Review"
         verbose_name_plural = "Reviews"
         unique_together = ["user", "product"]
+
+    def __str__(self):
+        return f"{self.user}-{self.product}"
+
+    def clean(self) -> None:
+        if self.rating < 1 or self.rating > 5:
+            raise ValidationError("Rating must be between 1 and 5")
+        return super().clean()
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
