@@ -113,6 +113,10 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "/"
 
+# media files
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

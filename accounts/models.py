@@ -26,7 +26,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self) -> str:
         return "{}".format(self.email)
 
- 
+
 class WishList(models.Model):
     user = models.OneToOneField(
         CustomUser, on_delete=models.CASCADE, related_name="wishlist"
@@ -59,4 +59,3 @@ class WishListItem(models.Model):
 
     def __str__(self) -> str:
         return f"{self.product.name}"
-    
