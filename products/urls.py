@@ -1,3 +1,6 @@
+"""
+This module defines the URL patterns for the products app.
+"""
 from django.urls import path
 
 from products import views

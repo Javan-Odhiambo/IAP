@@ -24,4 +24,39 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _("users")
 
     def __str__(self) -> str:
-        return "{} {}".format(self.first_name, self.last_name)
+        return "{}".format(self.email)
+
+
+class WishList(models.Model):
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, related_name="wishlist"
+    )
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated at"), auto_now=True)
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = _("wishlist")
+        verbose_name_plural = _("wishlists")
+
+    def __str__(self) -> str:
+        return "{}".format(self.user.email)
+
+
+class WishListItem(models.Model):
+    wishlist = models.ForeignKey(
+        WishList, on_delete=models.CASCADE, related_name="items"
+    )
+    product = models.ForeignKey(
+        "products.Product", on_delete=models.CASCADE, related_name="wishlist_items"
+    )
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name = _("wishlist item")
+        verbose_name_plural = _("wishlist items")
+        unique_together = ["wishlist", "product"]
+
+    def __str__(self) -> str:
+        return f"{self.product.name}"
+    

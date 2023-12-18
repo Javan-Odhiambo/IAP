@@ -63,7 +63,7 @@ def logout_user(request):
 
 
 @login_required
-def profile(request):
+def edit_profile(request):
     """Displays and edit the user profile"""
     if request.method == "POST":
         first_name = request.POST.get(

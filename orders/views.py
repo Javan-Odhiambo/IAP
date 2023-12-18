@@ -1,62 +1,108 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from orders import models
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.http import JsonResponse
-from products.models import Product
+from django.shortcuts import get_object_or_404, redirect, render
+
+from orders import models
+from orders.services import (
+    create_order_items,
+    get_cart_info,
+    get_cart_item,
+    get_checkout_user_info,
+    get_product_variant,
+    get_user_cart,
+)
+from products.models import Product, ProductColor, ProductSize, Variant
+
 
 # Create your views here.
 @login_required
 def checkout(request):
-    """ Checkout view"""
-    if request.method == 'POST':
-        user = request.user
-        loacation = request.POST.get('location')
-        phone_number = request.POST.get('phone_number')
-        cart = models.Cart.objects.filter(user=user).first()
-        if cart is None or cart.cart_items.count() == 0:
+    """Checkout view"""
+    if request.method == "POST":
+        # Get the current user, location and phone number from the request
+        user, location, phone_number = get_checkout_user_info(request)
+        # Get the cart for the current user
+        cart = get_object_or_404(models.Cart, user=user)
+        # Check if the cart is empty
+        if cart.cart_items.count() == 0:
             messages.error(request, "Cart is empty")
-            return redirect('cart')  # Redirect to cart page
-        # create order items from cart items
-        order = models.Order.objects.create(user=user, order_status="pending", )
-        for item in cart.cart_items.all():
-            models.OrderItem.objects.create(
-                order=order, product=item.product, quantity=item.quantity
-            )
-        cart.cart_items.all().delete()  # Delete cart items after creating order items
-    return render(request, template_name='orders/checkout.html')
+            return redirect("core:home")
+        try:
+            with transaction.atomic():
+                # create order items from cart items
+                order = models.Order.objects.create(
+                    user=user,
+                    order_status="pending",
+                    location=location,
+                    phone_number=phone_number,
+                )
+                create_order_items(cart, order)
+        except Exception as e:
+            messages.error(request, "An error occurred while processing your order")
+            return redirect("orders:checkout")
+    return render(request, template_name="orders/checkout.html", context={"cart": cart})
+
 
 @login_required
 def add_cart_item(request):
-    """ Add a product to cart"""
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        product = get_object_or_404(Product, id=product_id)
-        # Get the cart for the current user
-        cart, created = models.Cart.objects.get_or_create(user=request.user)
-        # Create a new cart item with the product, or update the quantity if the item already exists
-        cart_item, created = models.CartItem.objects.get_or_create(cart=cart, product=product)
-        if not created:
-            cart_item.quantity += 1
-            cart_item.save()
-        return JsonResponse({"message": "Product added to cart"})
-    else:
+    """Add a product to cart"""
+    if request.method != "POST":
         return JsonResponse({"error": "Invalid request"}, status=400)
+    # Get the product_id, size, color and quantity from the request
+    product_id, size, color, quantity = get_cart_info(request)
+    # Get the product, size and color
+    product = get_object_or_404(Product, id=product_id)
+    product_size = get_object_or_404(ProductSize, size=size)
+    product_color = get_object_or_404(ProductColor, color=color)
+    # Get the product variant
+    product_variant = get_product_variant(
+        product=product, size=product_size, color=product_color
+    )
+    if not product_variant:
+        return JsonResponse({"error": "Invalid request"}, status=400)
+    # Get the cart for the current user
+    cart, created = models.Cart.objects.get_or_create(
+        user=request.user, product_variant=product_variant
+    )
+    # Create a new cart item with the product, or update the quantity if the item already exists
+    cart_item, created = models.CartItem.objects.update_or_create(
+        cart=cart,
+        product_variant=product_variant,
+        defaults={"quantity": models.F("quantity") + quantity},
+    )
+    return JsonResponse({"message": "Product added to cart"}, status=200)
+
 
 @login_required
 def remove_cart_item(request):
-    """ Remove a product from cart"""
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        product = get_object_or_404(Product, id=product_id)
-        # Get the cart for the current user
-        cart = models.Cart.objects.filter(user=request.user).first()
-        if cart is not None:
-            cart_item = models.CartItem.objects.filter(cart=cart, product=product).first()
-            if cart_item is not None:
-                cart_item.delete()
-                return JsonResponse({"message": "Product removed from cart"})
+    """Remove a product from cart"""
+    if request.method != "POST":
         return JsonResponse({"error": "Invalid request"}, status=400)
-    else:
+    # Get the product_id, size, color, quanity from the request
+    product_id, size, color, quantity = get_cart_info(request)
+    # Get the product, size and color
+    product = get_object_or_404(Product, id=product_id)
+    product_size = get_object_or_404(ProductSize, size=size)
+    product_color = get_object_or_404(ProductColor, color=color)
+    # Get the product variant
+    product_variant = get_product_variant(
+        product=product, size=product_size, color=product_color
+    )
+    if not product_variant:
         return JsonResponse({"error": "Invalid request"}, status=400)
+    # Get the cart for the current user and the cart item
+    cart = get_user_cart(user=request.user)
+    cart_item = get_cart_item(cart=cart, product_variant=product_variant)
+    if not cart or not cart_item:
+        return JsonResponse({"error": "Invalid request"}, status=400)
+    if quantity < 1:
+        return JsonResponse({"error": "Invalid request"}, status=400)
+    if cart_item.quantity > quantity:
+        cart_item.quantity -= quantity
+        cart_item.save()
+        return JsonResponse({"message": "Product quantity updated"}, status=200)
+    if cart_item.quantity == quantity:
+        cart_item.delete()
+    return JsonResponse({"message": "Product removed from cart"}, status=200)
