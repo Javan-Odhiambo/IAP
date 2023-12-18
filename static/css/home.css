@@ -20,25 +20,46 @@ main{
     display: flex;
     flex-direction: column;
     background-color: var(--primary-color);
+    
 }
 .search-bar{
     display: flex;
     justify-content: center;
+    height: 3rem;
+    padding-top: 1rem;
+}
+.search-bar input{
+    border-radius: 1.5rem 0 0 1.5rem;
+    width: 30rem;
+} 
+.search-bar button{
+    border-radius: 0 1.5rem 1.5rem 0;
+    width: 3rem;
+    background: transparent;
 }
 .landing{
     display: flex;
     justify-content: center;
-    padding-top: 20px;
+    align-items: center;
+    padding-top: 1.2rem;
 }
 .landing div {
     display: flex;
     flex-direction: column;
     align-items: center;  
     justify-content: center;
-    padding-right: 100px;
+    padding-right: 5.6rem;
 }
 .landing div h2 {
-    padding-bottom: 30px;
+    padding-bottom: 2.2rem;
+    padding-top: 7.6rem;
+    padding-left: 2.7rem;
+    padding-right: 2.7rem;
+}
+.landing div p{
+    padding-bottom: 7.6rem;
+    padding-left: 2.7rem;
+    padding-right: 2.7rem;
 }
 .primary-display{
     display: flex;
@@ -46,7 +67,7 @@ main{
 }
 .primary-display h3{
     align-self: center;
-    padding-top: 50px;
+    padding-top: 2.8rem;
 }
 
 .landing-accent{
@@ -55,24 +76,30 @@ main{
 .product-container{
     display: flex;
     flex-direction: column;
-    padding: 70px;
+    padding: 3.9rem;
 }
 .product-section{
     display: flex;
     justify-content: space-between;
-    padding-top: 50px;
-    gap: 70px;
+    padding-top: 2.8rem;
+    gap: 3.9rem;
 }
 .product-card{
     display: flex;
     flex-direction: column;
     width: calc(25% - 50px); 
+    padding-right: 2.4rem;
+    padding-left: 2.4rem;
+}
+.product-card img {
+    width: 20rem;
+    height: 21rem;
 }
 .product-card div{
     justify-content: center;
 }
 .product {
-    padding: 10px;
+    padding: 0.5rem 1.6rem 0.6rem 0.6rem 0.6rem;
 }
 
 .product span {
@@ -80,13 +107,13 @@ main{
 }
 
 .product div {
-    margin-top: 10px;
+    margin-top: 1rem;
 }
 
 .product h4,
 .product p {
-    margin: 10px 0;
+    margin: 0.6rem 0;
 }
 .product button {
-    margin-top: 10px;
+    margin-top: 0.6rem;
 }
