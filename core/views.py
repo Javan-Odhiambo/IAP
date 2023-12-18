@@ -1,7 +1,19 @@
 from django.shortcuts import render
 
-# Create your views here.
+from products.models import Product
 
 
 def index(request):
-    return render(request, "core/home.html")
+    """View function for home page of site."""
+    context = {
+        "mens": Product.objects.filter(category__name="men").values(
+            "name", "description", "price"
+        )[:4],
+        "womens": Product.objects.filter(category__name="women").values(
+            "name", "description", "price"
+        )[:4],
+        "children": Product.objects.filter(category__name="children").values(
+            "name", "description", "price"
+        )[:4],
+    }
+    return render(request, template_name="core/home.html", context=context)

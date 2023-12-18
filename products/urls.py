@@ -8,12 +8,12 @@ from products import views
 app_name = "products"
 
 urlpatterns = [
-    path("", view=views.product_list, name="product-list"),
+    # path("", view=views.product_list, name="product-list"),
     path(
-        "<slug:slug>-<int:pk>/",
+        "product/<slug:slug>-<int:pk>/",
         view=views.product_detail,
         name="product-detail",
     ),
     path("search/", view=views.product_search, name="product-search"),
-    path("categories/", view=views.categories, name="categories"),
+    path("categories/<slug:slug>/", view=views.categories, name="categories"),
 ]

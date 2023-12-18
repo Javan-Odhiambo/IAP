@@ -2,7 +2,7 @@
 This module contains view functions for handling product-related requests.
 """
 
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from products import models
 
@@ -53,7 +53,7 @@ def product_search(request):
     Returns:
         HttpResponse: The HTTP response object containing the search results template.
     """
-    query = request.GET.get("q")
+    query = request.GET.get("query")
     products = models.Product.objects.filter(name__icontains=query)
     context = {
         "products": products,
@@ -61,18 +61,19 @@ def product_search(request):
     return render(request, template_name="core/search-results.html", context=context)
 
 
-def categories(request):
+def categories(request, slug):
     """
-    View function for displaying categories and their associated products.
+    View function for displaying products by category.
 
     Args:
         request (HttpRequest): The HTTP request object.
+        slug (str): The slug of the category.
 
     Returns:
         HttpResponse: The HTTP response object containing the category template.
     """
-    categories = models.Category.objects.all().prefetch_related("products")
+    categories = get_object_or_404(models.Category, slug=slug)
     context = {
-        "categories": categories,
+        "products": categories.products.all(),
     }
     return render(request, template_name="core/category.html", context=context)

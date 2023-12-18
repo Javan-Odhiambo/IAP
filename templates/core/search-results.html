@@ -7,5 +7,17 @@
 </head>
 <body>
     <h1>Search Results</h1>
+    {% for product in products %}
+    <div>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>{{ product.price }}</p>
+        {% for item in product.images.all %}
+            <img src="{{ item.image.url }}" alt="{{ product.name }}">
+            {% empty %}
+            <p>No image</p>
+        {% endfor %}
+    </div>
+{% endfor %}
 </body>
 </html>

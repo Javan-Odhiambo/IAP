@@ -2,15 +2,24 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
+import os
+import uuid
 
 User = get_user_model()
+
+def rename_image(instance, filename):
+    """Rename image to product name."""
+    upload_to = "products"
+    ext = filename.split(".")[-1]
+    filename = f"{instance.product.name}-{uuid.uuid4()}.{ext}"
+    return os.path.join(upload_to, filename)
 
 
 class Product(models.Model):
     """Model definition for Product."""
 
     name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, db_index=True, unique=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     category = models.ForeignKey(
@@ -36,8 +45,8 @@ class Product(models.Model):
 class ProductImage(models.Model):
     """Model definition for ProductImage."""
 
-    image = models.ImageField(upload_to="products")
-    product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=rename_image)
+    product = models.ForeignKey("products.Product", on_delete=models.CASCADE, related_name="images")
 
     class Meta:
         ordering = ["-id"]
@@ -111,7 +120,7 @@ class Category(models.Model):
     """Model definition for Category."""
 
     name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, db_index=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
