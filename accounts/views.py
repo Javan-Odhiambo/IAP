@@ -25,19 +25,19 @@ def signup_user(request):
     """Signs up a user"""
     if request.method == "POST":
         first_name = request.POST.get(
-            "first_name"
+            "firstname"
         )  # change depending on the name attribute of the input field
         last_name = request.POST.get(
-            "last_name"
+            "lastname"
         )  # change depending on the name attribute of the input field
         email = request.POST.get(
             "email"
         )  # change depending on the name attribute of the input field
         password1 = request.POST.get(
-            "password1"
+            "password"
         )  # change depending on the name attribute of the input field
         password2 = request.POST.get(
-            "password2"
+            "confirmpassword"
         )  # change depending on the name attribute of the input field
         if password1 != password2:
             messages.error(request, "Passwords do not match")
