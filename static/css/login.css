@@ -45,6 +45,7 @@ input{
   border: 0.06rem var(--secondary-color) solid;
   border-radius: 0.4rem;
   padding-left: 0.6rem;
+  outline: none;
 }
 input:active{
   border: 0.06rem var(--accent-color) solid;

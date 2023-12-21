@@ -1,13 +1,37 @@
-*{
-
-}
 .sign-up{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 1rem;
+}
+.sign-up h3{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
 }
 .input-fields{
     display: flex;
     flex-direction: column;
     
+}
+.input-fields label {
+    margin-bottom: 0.5rem;
+}
+.input-fields input {
+    margin-bottom: 1rem;
+}
+
+.detail{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+input{
+    width: 16.7rem;
+    height: 1.9rem;
+    border: 0.06rem solid var(--secondary-color);
+    border-radius: 0.4rem;
+    padding-left: 0.6rem;
+    outline: none;
+}
+input:focus{
+    border-color: var(--accent-color);
 }
