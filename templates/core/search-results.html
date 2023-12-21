@@ -1,23 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Search Results</h1>
-    {% for product in products %}
-    <div>
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p>{{ product.price }}</p>
-        {% for item in product.images.all %}
-            <img src="{{ item.image.url }}" alt="{{ product.name }}">
-            {% empty %}
-            <p>No image</p>
-        {% endfor %}
-    </div>
-{% endfor %}
-</body>
-</html>
+{% extends './../base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static '/css/search.css' %}">
+<link rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock %}
+
+{% block main %}
+<main>
+    <body class="container">
+        <div class="search-bar">
+            <form action="/search/" method="GET">
+                <input type="text" name="query" placeholder="">
+                <button type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+        <h1>Search Results {{ query }}</h1>
+        <div class="product-section">
+            {% for product in products %}
+            <div class="product-card">
+                {% for item in product.images.all %}
+                    <img src="{{ item.image.url }}" alt="{{ product.name }}">
+                    {% empty %}
+                    <p>No image</p>
+                {% endfor %}
+                <div class="product">
+                    <span>KSH {{ product.price }}</span>
+                    <div>
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.description }}</p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            {% endfor %}
+             <div class="product-card">
+                <img src="{% static '/images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. 
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="{% static '/images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="{% static '/images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="{% static '/images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="{% static '/images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>    
+            <div class="product-card">
+                <img src="{% static '/images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>  
+            <div class="product-card">
+                <img src="{% static '/images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script src=""></script>
+{% endblock %}

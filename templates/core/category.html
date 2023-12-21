@@ -1,21 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Category</h1> 
-    {% for category in categories  %}
-        <p>{{ category.name }}</p>
-        {% for product in category.products.all %}
-            <p>{{ product.name }}</p>
-        {% empty %}
-            <p>No product</p>
-        {% endfor %}
-    {% empty %}
-        <p>No categories</p>
-    {% endfor %}
-</body>
-</html>
+{% extends './../base.html' %}
+{% load static %}
+
+{% block title %}
+My Page Title
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block main %}
+<main>
+    <div class="container">
+        <div class="search-bar">
+            <form action="/search/" method="GET">
+                <input type="text" name="query" placeholder="">
+                <button type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+        <h1>Category</h1> 
+        <div class="product-section">
+            {% for category in categories %}
+                <h3>{{ category.name }}</h3>
+                <div class="product-section">
+                    {% for product in category.products.all %}
+                        {% for item in product.images.all %}
+                            <img src="{{ item.image.url }}" alt="{{ product.name }}">
+                        {% empty %}
+                            <p>No image</p>
+                        {% endfor %}
+                        <div class="product">
+                            <span>{{ product.price }}</span>
+                            <div>
+                                <h3>{{ product.name }}</h3>
+                                <p>{{ product.description }}</p>
+                            </div>
+                            <button class="btn-secondary">ADD TO CART</button>
+                        </div>
+                    {% empty %}
+                        <p>No product</p>
+                    {% endfor %}
+                </div>
+            {% empty %}
+                <!-- <p>No categories</p> -->
+            {% endfor %}
+
+            <div class="product-card">
+                <img src="{% static 'images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>    
+            </div>
+            <div class="product-card">
+                <img src="{% static 'images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="{% static 'images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="{% static 'images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="{% static 'images/card1 1.png' %}" alt="product img man">
+                <div class="product">
+                    <span>KSH 2000</span>
+                    <div>
+                        <h4>Black Sweat Shirt</h4>
+                        <p>
+                            Lorem, ipsum dolor vsit amet consectetur adipisicing elit. Nobis, recusandae.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis, recusandae.
+                        </p>
+                    </div>
+                    <button class="btn-secondary">ADD TO CART</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script src=""></script>
+{% endblock %}
