@@ -11,7 +11,7 @@
 .input-fields{
     display: flex;
     flex-direction: column;
-    
+
 }
 .input-fields label {
     margin-bottom: 0.5rem;

@@ -9,36 +9,31 @@
 
 {% block main %}
 <main class="container">
-  <div class="main">
-    <div class="login-form-container">
-      <form method="post" action="{% url "accounts:login" %}?next={{ request.GET.next | default:"/" }}">
-        {% csrf_token %}
-        <div class="login-text">LOG IN</div>
-        <div class="email-cont">
-          <label for="username">Email Adress:</label>
-          <input type="text" id="email" name="email" required class="input" />
+    <div class="main">
+        <div class="login-form-container">
+            <form method="post" action="{% url 'accounts:login' %}?next={{ request.GET.next | default:"/" }}">
+                {% csrf_token %}
+                <div class="login-text">LOG IN</div>
+                <div class="email-cont">
+                    <label for="username">Email Address:</label>
+                    <input type="text" id="email" name="email" required class="input" />
+                </div>
+                <div class="password-cont">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required />
+                </div>
+                <div class="submit">
+                    <input type="submit" value="LOG IN" class="btn-primary" />
+                </div>
+                <div class="exceptions">
+                    <ul>
+                        <!-- <li><a href="#">Forgot your password ?</a></li> -->
+                        <li><a href="{% url 'accounts:signup' %}">Do not have an account ?</a></li>
+                    </ul>
+                </div>
+            </form>
         </div>
-        <div class="password-cont">
-          <label for="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-          />
-        </div>
-        <div class="submit">
-          <input type="submit" value="LOG IN" class="btn-primary" />
-        </div>
-        <div class="exceptions">
-          <ul>
-            <li><a href="#">Forgot your password ?</a></li>
-            <li><a href="#">Do not have an account ?</a></li>
-          </ul>
-        </div>
-      </form>
     </div>
-  </div>
 
 </main>
 {% endblock %}

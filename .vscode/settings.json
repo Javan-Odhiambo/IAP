@@ -5,6 +5,6 @@
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "vscode.html-language-features",
     }
 }

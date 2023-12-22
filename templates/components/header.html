@@ -1,10 +1,24 @@
 <header>
-    <div class="header-container">
-        <button class="hambugger"><i class="fa fa-bars" aria-hidden="true"></i></button>
-        <h3>Apparel Avenue</h3>
-        <div class="header-icons">
-            <button><i class="fa fa-user" aria-hidden="true"></i></button>
-            <button> <i class="fa fa-shopping-bag" aria-hidden="true"></i></button>
+    <aside id="sidebar">
+        <span id="sidebar-close" class="close-sidebar"><i class="fa fa-times" aria-hidden="true"></i></span>
+        <ul>
+            <li><a href="{% url 'products:categories' 'men' %}" class="full-width-link">Men</a></li>
+            <li><a href="{% url 'products:categories' 'women' %}" class="full-width-link">Women</a></li>
+            <li><a href="{% url 'products:categories' 'children' %}" class="full-width-link">Children</a></li>
+        </ul>
+    </aside>
+    <span id="hambugger" class="hambugger"><i class="fa fa-bars" aria-hidden="true"></i></span>
+    <div><a id="logo" href="{% url 'core:home' %}">Apparel Avenue</a></div>
+    <div class="header-icons">
+        {% if request.user.is_authenticated %}
+        <span id="profile-icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+        <div id="profile-options">
+            <span><a href="{% url 'accounts:logout' %}" class="full-width-link">Logout</a></span>
         </div>
+        {% endif %}
+        <span><a href="{% url 'orders:checkout' %}">
+                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+            </a>
+        </span>
     </div>
 </header>

@@ -1,63 +1,69 @@
-
-ul{
-  list-style-type: none;
-  color: var(--text-primary-color);
-}
-label{
-  display: block;
-  color: var(--text-primary-color);
-}
-.main{
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
-.login-form-container{
-  width:21.2rem;
-  height: 23.8rem;
-  display: flex;
-  margin-bottom: 1.7rem;
-  align-items: center;
-  justify-content: center;
-  font-family:Poppins;
-}
-.login-text{
-  text-align: center;
-  font-weight: 500;
-  color: var(--text-primary-color);
-  font-size: 1.3rem;
-  margin-bottom: 1.7rem;
-  margin-top: 0.3rem;
-
+ul {
+    list-style-type: none;
+    color: var(--text-primary-color);
 }
 
-.password-cont , .email-cont{
-  font-size: 1rem;
-  width: 16.7rem;
-  height: 4.2rem;
-  margin-bottom: 1.7rem;
+label {
+    display: block;
+    color: var(--text-primary-color);
 }
-input{
-  width: 16.7rem;
-  height: 1.9rem;
-  border: 0.06rem var(--secondary-color) solid;
-  border-radius: 0.4rem;
-  padding-left: 0.6rem;
-  outline: none;
+
+.main {
+    display: flex;
+    justify-content: center;;
 }
-input:active{
-  border: 0.06rem var(--accent-color) solid;
+
+.login-form-container {
+    width: 21.2rem;
+    height: 23.8rem;
+    display: flex;
+    margin-bottom: 1.7rem;
+    align-items: center;
+    justify-content: center;
+    font-family: Poppins;
 }
-.exceptions ul{
-  padding: 0;
-  margin: 0;
+
+.login-text {
+    text-align: center;
+    font-weight: 500;
+    color: var(--text-primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1.7rem;
+    margin-top: 0.3rem;
+
 }
-.exceptions li{
-  margin-bottom: 0.8rem;
+
+.password-cont,
+.email-cont {
+    font-size: 1rem;
+    width: 16.7rem;
+    height: 4.2rem;
+    margin-bottom: 1.7rem;
 }
-.exceptions a{
-  text-decoration: none;
-  color: var(--text-primary-color);
+
+input {
+    width: 16.7rem;
+    height: 1.9rem;
+    border: 0.06rem var(--secondary-color) solid;
+    border-radius: 0.4rem;
+    padding-left: 0.6rem;
+    outline: none;
+}
+
+input:active {
+    border: 0.06rem var(--accent-color) solid;
+}
+
+.exceptions ul {
+    padding: 0;
+    margin: 0;
+}
+
+.exceptions li {
+    margin-bottom: 0.8rem;
+}
+
+.exceptions a {
+    text-decoration: none;
+    color: var(--text-primary-color);
 }
