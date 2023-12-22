@@ -10,9 +10,9 @@
     <div class="Categories">
       <p>Categories</p>
       <ul>
-        <li><a href="#">Men</a></li>
-        <li><a href="#"> Women </a></li>
-        <li><a href="#"> Children </a></li>
+        <li><a href="{% url 'products:categories' 'men' %}">Men</a></li>
+        <li><a href="{% url 'products:categories' 'women' %}"> Women </a></li>
+        <li><a href="{% url 'products:categories' 'children' %}"> Children </a></li>
       </ul>
     </div>
     <div class="social-platforms">

@@ -9,8 +9,8 @@ for (var i = 0; i < sizeButtons.length; i++) {
 }
 function getSize(event) {
   var button = event.target;
-  var size = button.innerText; 
-  
+  var size = button.innerText;
+
   currSize.innerText=size
 }
 

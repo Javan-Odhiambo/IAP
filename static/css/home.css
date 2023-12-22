@@ -1,21 +1,4 @@
-:root{
-    --primary-color: #FFFFFF;
-    --accent-color: #4A2DFC;
-    --secondary-color: #0C0101;
-    --light-grey: #D9D9D9;
-    --mid-grey: #7A7A7A;
-    --dark-grey:  #353535;
-    
-    --btn-primary-color: var(--accent-color);
-    --btn-secondary-color: #6c757d;
-    --btn-primary-text-color: #fff;
-    --btn-secondary-text-color: #fff;
-    
-    --text-primary-color: #212529;
-    --text-secondary-color: #6c757d;
-    --text-accent-color: #4A2DFC;
-    --text-light-color: #fff;
-}
+
 main{
     display: flex;
     flex-direction: column;
@@ -43,6 +26,7 @@ main{
     width: 3rem;
     background: transparent;
 }
+
 .landing{
     display: flex;
     justify-content: center;
@@ -83,6 +67,8 @@ main{
 
 .landing-accent{
     color: var(--text-accent-color);
+    font-family: 'Istok Web', sans-serif;
+    font-family: 'Ruthie', cursive;
 }
 .product-container{
     display: flex;
